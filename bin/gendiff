@@ -25,9 +25,16 @@ Options:
   --format <fmt>                Report format [default: stylish]
 DOC;
 
+$format = 'stylish';
+
 if (isset($argv[1])) {
-    if ($argv[1] === '-h') {
+    if ($argv[1] === '-h' || $argv[1] === '--help') {
         print_r($doc . PHP_EOL);
-        //print_r("\n");
+    }
+
+    if ($argv[1] === '--format') {
+        if (isset($argv[2])) {
+            $format = $argv[2];
+        }
     }
 }

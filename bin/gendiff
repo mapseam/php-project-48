@@ -11,7 +11,9 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-$doc = <<<DOC
+use function Gendiff\Differ\genDiff;
+
+$usageDoc = <<<DOC
 Generate diff
 
 Usage:
@@ -25,11 +27,15 @@ Options:
   --format <fmt>                Report format [default: stylish]
 DOC;
 
-$format = 'stylish';
+/*$format = 'stylish';
 
 if (isset($argv[1])) {
     if ($argv[1] === '-h' || $argv[1] === '--help') {
-        print_r($doc . PHP_EOL);
+        print_r($usageDoc . PHP_EOL);
+    }
+
+    if ($argv[1] === '-v' || $argv[1] === '--version') {
+        print_r("gendiff 1.0" . PHP_EOL);
     }
 
     if ($argv[1] === '--format') {
@@ -37,4 +43,16 @@ if (isset($argv[1])) {
             $format = $argv[2];
         }
     }
-}
+}*/
+
+$params = [
+    'version'=>'gendiff 1.0'
+  ];
+
+$args = Docopt::handle($usageDoc, $params);
+
+$filePath1 = $args->args['<firstFile>'];
+$filePath2 = $args->args['<secondFile>'];
+$format = $args->args['--format'];
+
+echo genDiff($filePath1, $filePath2, $format = "stylish");

@@ -8,16 +8,20 @@ function convert($data, $fileExt)
 {
     switch ($fileExt) {
         case "json":
-            return json_decode($data, true);
+            $result = json_decode($data, true);
+            break;
         case "yml":
-            // no break;
+            // no break
         case "yaml":
             try {
-                return Yaml::parse($data);
+                $result = Yaml::parse($data);
             } catch (ParseException $exception) {
                 printf('Unable to parse the YAML string: %s', $exception->getMessage());
             }
+            break;
         default:
             throw new \Exception("Wrong file extension: {$fileExt}");
     }
+
+    return $result;
 }

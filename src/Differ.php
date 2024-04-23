@@ -6,20 +6,20 @@ use function Gendiff\Parsers\convert;
 
 function getRealPath($path)
 {
-    $parts = [__DIR__, '../files', $path];
+    $parts = [__DIR__, '../tests/fixtures', $path];
     return realpath(implode('/', $parts));
 }
 
-function getFileContent($file, $format)
+function getFileContent($fileName)
 {
-    if (file_exists($file)) {
-        $fileContent = file_get_contents($file);
-        $fileData = convert($fileContent, "json");
-    } else {
-        throw new \Exception("Unable to open file: '{$file}'!");
-    }
+    $fileNameParts = pathinfo($fileName);
 
-    //print_r($fileData);
+    if (file_exists($fileName)) {
+        $fileContent = file_get_contents($fileName);
+        $fileData = convert($fileContent, $fileNameParts['extension']);
+    } else {
+        throw new \Exception("Unable to open file: '{$fileName}'!");
+    }
 
     foreach ($fileData as $key => $value) {
         if (is_bool($value)) {
@@ -41,13 +41,13 @@ function toString($arr)
     return $str;
 }
 
-function genDiff($filePath1, $filePath2, $format)
+function genDiff($filePath1, $filePath2, $format = "stylish")
 {
     $orgFile = getRealPath($filePath1);
     $modFile = getRealPath($filePath2);
 
-    $orgData = getFileContent($orgFile, $format);
-    $modData = getFileContent($modFile, $format);
+    $orgData = getFileContent($orgFile);
+    $modData = getFileContent($modFile);
 
     $orgPairs = [];
     foreach ($orgData as $orgKey => $orgValue) {

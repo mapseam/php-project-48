@@ -4,24 +4,20 @@ namespace Gendiff\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-function convert($data, $fileExt)
-{
-    switch ($fileExt) {
-        case "json":
-            $result = json_decode($data, true);
-            break;
-        case "yml":
-            // no break
-        case "yaml":
-            try {
-                $result = Yaml::parse($data);
-            } catch (ParseException $exception) {
-                printf('Unable to parse the YAML string: %s', $exception->getMessage());
-            }
-            break;
-        default:
-            throw new \Exception("Wrong file extension: {$fileExt}");
-    }
+use function Gendiff\Helpers\getFixturePath;
+use function Gendiff\Helpers\getFileData;
 
-    return $result;
+/**
+ * @throws \Exception
+ */
+function parse(string $fileName): array
+{
+    $fileData = getFileData(getFixturePath($fileName));
+    $fileNameExt = pathinfo($fileName, PATHINFO_EXTENSION);
+
+    return match ($fileNameExt) {
+        'yaml', 'yml' => Yaml::parse($fileData),
+        'json' => json_decode($fileData, true),
+        default => throw new \Exception("Unsupported file format: $fileNameExt"),
+    };
 }

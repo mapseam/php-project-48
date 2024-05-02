@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Gendiff\\Tests\\DifferTest::testGenDiffJSON":0.533,"Gendiff\\Tests\\DifferTest::testGenDiffYML":0.045}}
+{"version":1,"defects":{"Gendiff\\Tests\\DifferTest::testStylish":7,"Gendiff\\Tests\\DifferTest::testPlain":5,"Gendiff\\Tests\\DifferTest::testJson":5},"times":{"Gendiff\\Tests\\DifferTest::testGenDiffJSON":0.533,"Gendiff\\Tests\\DifferTest::testGenDiffYML":0.045,"Gendiff\\Tests\\DifferTest::testStylish":0.236,"Gendiff\\Tests\\DifferTest::testPlain":0.018,"Gendiff\\Tests\\DifferTest::testJson":0.03}}

@@ -2,84 +2,71 @@
 
 namespace Gendiff\Differ;
 
-use function Gendiff\Parsers\convert;
+use function Gendiff\Parsers\parse;
+use function Functional\sort;
+use function Gendiff\Formatters\selectFormatter;
 
-function getRealPath($path)
+function buildInternalStruct(array $oldData, array $newData): array
 {
-    $parts = [__DIR__, '../tests/fixtures', $path];
-    return realpath(implode('/', $parts));
+    $oldKeys = array_keys($oldData);
+    $newKeys = array_keys($newData);
+
+    $commonKeys = array_unique(array_merge($oldKeys, $newKeys));
+    $sortedKeys = sort($commonKeys, fn ($left, $right) => strcmp($left, $right));
+
+    $intStruct = array_map(function ($key) use ($oldData, $newData) {
+        $oldValue = $oldData[$key] ?? null;
+        $newValue = $newData[$key] ?? null;
+
+        if (is_array($oldValue) && is_array($newValue)) {
+            return [
+                'key' => $key,
+                'status' => 'nested',
+                'children' => buildInternalStruct($oldValue, $newValue)
+            ];
+        }
+
+        if (!array_key_exists($key, $newData)) {
+            return [
+                'key' => $key,
+                'status' => 'deleted',
+                'oldValue' => $oldValue
+            ];
+        }
+
+        if (!array_key_exists($key, $oldData)) {
+            return [
+                'key' => $key,
+                'status' => 'added',
+                'newValue' => $newValue
+            ];
+        }
+
+        if ($oldValue !== $newValue) {
+            return [
+                'key' => $key,
+                'status' => 'changed',
+                'oldValue' => $oldValue,
+                'newValue' => $newValue
+            ];
+        }
+
+        return [
+            'key' => $key,
+            'status' => 'unchanged',
+            'oldValue' => $oldValue
+        ];
+    }, $sortedKeys);
+
+    return $intStruct;
 }
 
-function getFileContent($fileName)
+function genDiff(string $oldFileName, string $newFileName, string $formatType = 'stylish'): string
 {
-    $fileNameParts = pathinfo($fileName);
+    $oldFileData = parse($oldFileName);
+    $newFileData = parse($newFileName);
 
-    if (file_exists($fileName)) {
-        $fileContent = file_get_contents($fileName);
-        $fileData = convert($fileContent, $fileNameParts['extension']);
-    } else {
-        throw new \Exception("Unable to open file: '{$fileName}'!");
-    }
+    $intStruct = buildInternalStruct($oldFileData, $newFileData);
 
-    foreach ($fileData as $key => $value) {
-        if (is_bool($value)) {
-            $fileData[$key] = ($value) ? 'true' : 'false';
-        }
-    }
-
-    return $fileData;
-}
-
-function toString($arr)
-{
-    $str = "{\n";
-    foreach ($arr as $value) {
-        $str .= $value . "\n";
-    }
-    $str .= "}\n";
-
-    return $str;
-}
-
-function genDiff($filePath1, $filePath2, $format = "stylish")
-{
-    $orgFile = getRealPath($filePath1);
-    $modFile = getRealPath($filePath2);
-
-    $orgData = getFileContent($orgFile);
-    $modData = getFileContent($modFile);
-
-    $orgPairs = [];
-    foreach ($orgData as $orgKey => $orgValue) {
-        if (array_key_exists($orgKey, $modData)) {
-            foreach ($modData as $modKey => $modValue) {
-                if ($orgKey === $modKey && $orgValue == $modValue) {
-                    $orgPairs[] = "    {$orgKey}: {$orgValue}";
-                } elseif ($orgKey === $modKey && $orgValue != $modValue) {
-                    $orgPairs[] = "  - {$orgKey}: {$orgValue}";
-                }
-            }
-        } else {
-            $orgPairs[] = "  - {$orgKey}: {$orgValue}";
-        }
-    }
-    sort($orgPairs);
-
-    $modPairs = [];
-    foreach ($modData as $modKey => $modValue) {
-        if (!array_key_exists($modKey, $orgData)) {
-            $modPairs[] = "  + {$modKey}: {$modValue}";
-        } else {
-            foreach ($orgData as $orgKey => $orgValue) {
-                if ($orgKey == $modKey && $orgValue != $modValue) {
-                    $modPairs[] = "  + {$orgKey}: {$modValue}";
-                }
-            }
-        }
-    }
-    sort($modPairs);
-
-    $pairs = array_merge($orgPairs, $modPairs);
-
-    return toString($pairs);
+    return selectFormatter($intStruct, $formatType);
 }

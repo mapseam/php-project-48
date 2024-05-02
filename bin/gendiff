@@ -28,13 +28,22 @@ Options:
 DOC;
 
 $params = [
-    'version'=>'^1.0'
+    'version'=>'^1.0.0'
   ];
 
 $args = Docopt::handle($usageDoc, $params);
 
-$filePath1 = $args->args['<firstFile>'];
-$filePath2 = $args->args['<secondFile>'];
+$firstFile = $args->args['<firstFile>'];
+$secondFile = $args->args['<secondFile>'];
 $format = $args->args['--format'];
 
-echo genDiff($filePath1, $filePath2, $format);
+if (!isset($format)) {
+  $format = 'stylish';
+}
+
+try {
+  $diff = genDiff($firstFile, $secondFile, $format);
+  print_r($diff);
+} catch (Exception $ex) {
+  print_r($ex->getMessage());
+}

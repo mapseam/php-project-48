@@ -1,156 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714646170">
-  <project timestamp="1714646170">
+<coverage generated="1714650776">
+  <project timestamp="1714650776">
     <file name="/home/kov/prj/php-project-48/src/Differ.php">
-      <line num="11" type="stmt" count="3"/>
-      <line num="12" type="stmt" count="3"/>
-      <line num="14" type="stmt" count="3"/>
-      <line num="15" type="stmt" count="3"/>
-      <line num="17" type="stmt" count="3"/>
-      <line num="18" type="stmt" count="3"/>
-      <line num="19" type="stmt" count="3"/>
-      <line num="21" type="stmt" count="3"/>
-      <line num="22" type="stmt" count="3"/>
-      <line num="23" type="stmt" count="3"/>
-      <line num="24" type="stmt" count="3"/>
-      <line num="25" type="stmt" count="3"/>
-      <line num="26" type="stmt" count="3"/>
-      <line num="29" type="stmt" count="3"/>
-      <line num="30" type="stmt" count="3"/>
-      <line num="31" type="stmt" count="3"/>
-      <line num="32" type="stmt" count="3"/>
-      <line num="33" type="stmt" count="3"/>
-      <line num="34" type="stmt" count="3"/>
-      <line num="37" type="stmt" count="3"/>
-      <line num="38" type="stmt" count="3"/>
-      <line num="39" type="stmt" count="3"/>
-      <line num="40" type="stmt" count="3"/>
-      <line num="41" type="stmt" count="3"/>
-      <line num="42" type="stmt" count="3"/>
-      <line num="45" type="stmt" count="3"/>
-      <line num="46" type="stmt" count="3"/>
-      <line num="47" type="stmt" count="3"/>
-      <line num="48" type="stmt" count="3"/>
-      <line num="49" type="stmt" count="3"/>
-      <line num="50" type="stmt" count="3"/>
-      <line num="51" type="stmt" count="3"/>
-      <line num="54" type="stmt" count="3"/>
-      <line num="55" type="stmt" count="3"/>
-      <line num="56" type="stmt" count="3"/>
-      <line num="57" type="stmt" count="3"/>
-      <line num="58" type="stmt" count="3"/>
-      <line num="59" type="stmt" count="3"/>
-      <line num="61" type="stmt" count="3"/>
-      <line num="66" type="stmt" count="3"/>
-      <line num="67" type="stmt" count="3"/>
-      <line num="69" type="stmt" count="3"/>
-      <line num="71" type="stmt" count="3"/>
-      <metrics loc="73" ncloc="73" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="43" coveredelements="43"/>
+      <line num="11" type="stmt" count="6"/>
+      <line num="12" type="stmt" count="0"/>
+      <line num="15" type="stmt" count="6"/>
+      <line num="17" type="stmt" count="6"/>
+      <line num="18" type="stmt" count="0"/>
+      <line num="21" type="stmt" count="6"/>
+      <line num="26" type="stmt" count="6"/>
+      <line num="27" type="stmt" count="6"/>
+      <line num="29" type="stmt" count="6"/>
+      <line num="30" type="stmt" count="6"/>
+      <line num="32" type="stmt" count="6"/>
+      <line num="33" type="stmt" count="6"/>
+      <line num="34" type="stmt" count="6"/>
+      <line num="36" type="stmt" count="6"/>
+      <line num="37" type="stmt" count="6"/>
+      <line num="38" type="stmt" count="6"/>
+      <line num="39" type="stmt" count="6"/>
+      <line num="40" type="stmt" count="6"/>
+      <line num="41" type="stmt" count="6"/>
+      <line num="44" type="stmt" count="6"/>
+      <line num="45" type="stmt" count="6"/>
+      <line num="46" type="stmt" count="6"/>
+      <line num="47" type="stmt" count="6"/>
+      <line num="48" type="stmt" count="6"/>
+      <line num="49" type="stmt" count="6"/>
+      <line num="52" type="stmt" count="6"/>
+      <line num="53" type="stmt" count="6"/>
+      <line num="54" type="stmt" count="6"/>
+      <line num="55" type="stmt" count="6"/>
+      <line num="56" type="stmt" count="6"/>
+      <line num="57" type="stmt" count="6"/>
+      <line num="60" type="stmt" count="6"/>
+      <line num="61" type="stmt" count="6"/>
+      <line num="62" type="stmt" count="6"/>
+      <line num="63" type="stmt" count="6"/>
+      <line num="64" type="stmt" count="6"/>
+      <line num="65" type="stmt" count="6"/>
+      <line num="66" type="stmt" count="6"/>
+      <line num="69" type="stmt" count="6"/>
+      <line num="70" type="stmt" count="6"/>
+      <line num="71" type="stmt" count="6"/>
+      <line num="72" type="stmt" count="6"/>
+      <line num="73" type="stmt" count="6"/>
+      <line num="74" type="stmt" count="6"/>
+      <line num="76" type="stmt" count="6"/>
+      <line num="81" type="stmt" count="6"/>
+      <line num="82" type="stmt" count="6"/>
+      <line num="84" type="stmt" count="6"/>
+      <line num="85" type="stmt" count="6"/>
+      <line num="87" type="stmt" count="6"/>
+      <line num="88" type="stmt" count="6"/>
+      <line num="90" type="stmt" count="6"/>
+      <line num="92" type="stmt" count="6"/>
+      <metrics loc="94" ncloc="94" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="51" elements="53" coveredelements="51"/>
     </file>
     <file name="/home/kov/prj/php-project-48/src/Formatters.php">
-      <line num="11" type="stmt" count="3"/>
-      <line num="12" type="stmt" count="3"/>
-      <line num="13" type="stmt" count="3"/>
-      <line num="14" type="stmt" count="3"/>
-      <line num="15" type="stmt" count="3"/>
-      <line num="16" type="stmt" count="3"/>
+      <line num="11" type="stmt" count="6"/>
+      <line num="12" type="stmt" count="6"/>
+      <line num="13" type="stmt" count="6"/>
+      <line num="14" type="stmt" count="6"/>
+      <line num="15" type="stmt" count="6"/>
+      <line num="16" type="stmt" count="6"/>
       <metrics loc="18" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="6" coveredelements="6"/>
     </file>
     <file name="/home/kov/prj/php-project-48/src/Formatters/Json.php">
-      <line num="7" type="stmt" count="1"/>
+      <line num="7" type="stmt" count="2"/>
       <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="1" coveredelements="1"/>
     </file>
     <file name="/home/kov/prj/php-project-48/src/Formatters/Plain.php">
-      <line num="7" type="stmt" count="1"/>
-      <line num="8" type="stmt" count="1"/>
-      <line num="9" type="stmt" count="1"/>
-      <line num="10" type="stmt" count="1"/>
-      <line num="11" type="stmt" count="1"/>
-      <line num="13" type="stmt" count="1"/>
-      <line num="16" type="stmt" count="1"/>
-      <line num="17" type="stmt" count="1"/>
-      <line num="18" type="stmt" count="1"/>
-      <line num="19" type="stmt" count="1"/>
-      <line num="20" type="stmt" count="1"/>
-      <line num="21" type="stmt" count="1"/>
-      <line num="22" type="stmt" count="1"/>
-      <line num="23" type="stmt" count="1"/>
-      <line num="24" type="stmt" count="1"/>
-      <line num="25" type="stmt" count="1"/>
+      <line num="7" type="stmt" count="2"/>
+      <line num="8" type="stmt" count="2"/>
+      <line num="9" type="stmt" count="2"/>
+      <line num="10" type="stmt" count="2"/>
+      <line num="11" type="stmt" count="2"/>
+      <line num="13" type="stmt" count="2"/>
+      <line num="16" type="stmt" count="2"/>
+      <line num="17" type="stmt" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="2"/>
+      <line num="20" type="stmt" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="22" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="2"/>
+      <line num="24" type="stmt" count="2"/>
+      <line num="25" type="stmt" count="2"/>
       <line num="27" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="1"/>
-      <line num="31" type="stmt" count="1"/>
-      <line num="33" type="stmt" count="1"/>
-      <line num="38" type="stmt" count="1"/>
-      <line num="39" type="stmt" count="1"/>
-      <line num="42" type="stmt" count="1"/>
-      <line num="43" type="stmt" count="1"/>
-      <line num="46" type="stmt" count="1"/>
-      <line num="47" type="stmt" count="1"/>
-      <line num="50" type="stmt" count="1"/>
-      <line num="51" type="stmt" count="1"/>
-      <line num="54" type="stmt" count="1"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="42" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="46" type="stmt" count="2"/>
+      <line num="47" type="stmt" count="2"/>
+      <line num="50" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="54" type="stmt" count="2"/>
       <metrics loc="56" ncloc="56" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="28" elements="29" coveredelements="28"/>
     </file>
     <file name="/home/kov/prj/php-project-48/src/Formatters/Stylish.php">
-      <line num="7" type="stmt" count="1"/>
-      <line num="9" type="stmt" count="1"/>
-      <line num="10" type="stmt" count="1"/>
-      <line num="11" type="stmt" count="1"/>
-      <line num="12" type="stmt" count="1"/>
-      <line num="14" type="stmt" count="1"/>
-      <line num="16" type="stmt" count="1"/>
-      <line num="17" type="stmt" count="1"/>
-      <line num="18" type="stmt" count="1"/>
-      <line num="19" type="stmt" count="1"/>
-      <line num="20" type="stmt" count="1"/>
-      <line num="21" type="stmt" count="1"/>
-      <line num="22" type="stmt" count="1"/>
-      <line num="23" type="stmt" count="1"/>
-      <line num="24" type="stmt" count="1"/>
-      <line num="25" type="stmt" count="1"/>
-      <line num="26" type="stmt" count="1"/>
+      <line num="7" type="stmt" count="2"/>
+      <line num="9" type="stmt" count="2"/>
+      <line num="10" type="stmt" count="2"/>
+      <line num="11" type="stmt" count="2"/>
+      <line num="12" type="stmt" count="2"/>
+      <line num="14" type="stmt" count="2"/>
+      <line num="16" type="stmt" count="2"/>
+      <line num="17" type="stmt" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="2"/>
+      <line num="20" type="stmt" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="22" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="2"/>
+      <line num="24" type="stmt" count="2"/>
+      <line num="25" type="stmt" count="2"/>
+      <line num="26" type="stmt" count="2"/>
       <line num="28" type="stmt" count="0"/>
-      <line num="30" type="stmt" count="1"/>
-      <line num="32" type="stmt" count="1"/>
-      <line num="34" type="stmt" count="1"/>
-      <line num="39" type="stmt" count="1"/>
-      <line num="40" type="stmt" count="1"/>
-      <line num="43" type="stmt" count="1"/>
-      <line num="44" type="stmt" count="1"/>
-      <line num="47" type="stmt" count="1"/>
-      <line num="48" type="stmt" count="1"/>
-      <line num="51" type="stmt" count="1"/>
-      <line num="52" type="stmt" count="1"/>
-      <line num="53" type="stmt" count="1"/>
-      <line num="55" type="stmt" count="1"/>
-      <line num="56" type="stmt" count="1"/>
-      <line num="57" type="stmt" count="1"/>
-      <line num="58" type="stmt" count="1"/>
-      <line num="60" type="stmt" count="1"/>
-      <line num="62" type="stmt" count="1"/>
-      <line num="65" type="stmt" count="1"/>
+      <line num="30" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="2"/>
+      <line num="47" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="52" type="stmt" count="2"/>
+      <line num="53" type="stmt" count="2"/>
+      <line num="55" type="stmt" count="2"/>
+      <line num="56" type="stmt" count="2"/>
+      <line num="57" type="stmt" count="2"/>
+      <line num="58" type="stmt" count="2"/>
+      <line num="60" type="stmt" count="2"/>
+      <line num="62" type="stmt" count="2"/>
+      <line num="65" type="stmt" count="2"/>
       <metrics loc="67" ncloc="67" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="36" elements="37" coveredelements="36"/>
     </file>
-    <file name="/home/kov/prj/php-project-48/src/Helpers.php">
-      <line num="7" type="stmt" count="3"/>
-      <line num="8" type="stmt" count="3"/>
-      <line num="13" type="stmt" count="3"/>
-      <line num="15" type="stmt" count="3"/>
-      <line num="16" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="3"/>
-      <metrics loc="21" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="5" elements="6" coveredelements="5"/>
-    </file>
     <file name="/home/kov/prj/php-project-48/src/Parsers.php">
-      <line num="15" type="stmt" count="3"/>
-      <line num="16" type="stmt" count="3"/>
-      <line num="18" type="stmt" count="3"/>
-      <line num="19" type="stmt" count="3"/>
-      <line num="20" type="stmt" count="3"/>
-      <line num="21" type="stmt" count="3"/>
-      <line num="22" type="stmt" count="3"/>
-      <metrics loc="24" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="7" coveredelements="7"/>
+      <line num="12" type="stmt" count="6"/>
+      <line num="13" type="stmt" count="6"/>
+      <line num="14" type="stmt" count="6"/>
+      <line num="15" type="stmt" count="6"/>
+      <line num="16" type="stmt" count="6"/>
+      <metrics loc="18" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="5" coveredelements="5"/>
     </file>
-    <metrics files="7" loc="268" ncloc="265" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="129" coveredstatements="126" elements="129" coveredelements="126"/>
+    <metrics files="6" loc="262" ncloc="259" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="131" coveredstatements="127" elements="131" coveredelements="127"/>
   </project>
 </coverage>

@@ -6,6 +6,21 @@ use function Functional\sort;
 use function Differ\Parsers\parse;
 use function Differ\Formatters\selectFormatter;
 
+function getFileData(string $fileName): string
+{
+    if (!file_exists($fileName)) {
+        throw new \Exception("File " . $fileName . " - not found");
+    }
+
+    $data = file_get_contents($fileName);
+
+    if ($data === false) {
+        throw new \Exception("Can't read file " . $fileName);
+    }
+
+    return $data;
+}
+
 function buildInternalStruct(array $oldData, array $newData): array
 {
     $oldKeys = array_keys($oldData);
@@ -63,8 +78,14 @@ function buildInternalStruct(array $oldData, array $newData): array
 
 function genDiff(string $oldFileName, string $newFileName, string $formatType = 'stylish'): string
 {
-    $oldFileData = parse($oldFileName);
-    $newFileData = parse($newFileName);
+    $oldFileExt = pathinfo($oldFileName, PATHINFO_EXTENSION);
+    $newFileExt = pathinfo($newFileName, PATHINFO_EXTENSION);
+
+    $oldFileData = getFileData($oldFileName);
+    $newFileData = getFileData($newFileName);
+
+    $oldFileData = parse($oldFileData, $oldFileExt);
+    $newFileData = parse($newFileData, $newFileExt);
 
     $intStruct = buildInternalStruct($oldFileData, $newFileData);
 

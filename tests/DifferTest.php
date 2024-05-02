@@ -1,44 +1,41 @@
 <?php
 
-namespace Differ\Tests;
+namespace Differ\Tests\DifferTest;
 
+use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function Differ\Differ\genDiff;
-use function Differ\Helpers\getFixturePath;
 
 class DifferTest extends TestCase
 {
-    public function testStylish(): void
+    public function getFixturePath($fileName)
     {
-        $expected = file_get_contents(getFixturePath("stylishResult.txt"));
-        $this->assertEquals($expected, genDiff("file1.json", "file2.json"));
-        $this->assertEquals($expected, genDiff("file1.yml", "file2.yml"));
-
-        $expected = file_get_contents(getFixturePath("stylishResultNested.txt"));
-        $this->assertEquals($expected, genDiff("file3.json", "file4.json"));
-        $this->assertEquals($expected, genDiff("file3.yml", "file4.yml"));
+        return __DIR__ . "/fixtures/" . $fileName;
     }
 
-    public function testPlain(): void
+    public static function additionProvider(): mixed
     {
-        $expected = file_get_contents(getFixturePath("plainResult.txt"));
-        $this->assertEquals($expected, genDiff("file1.json", "file2.json", 'plain'));
-        $this->assertEquals($expected, genDiff("file1.yml", "file2.yml", 'plain'));
-
-        $expected = file_get_contents(getFixturePath("plainResultNested.txt"));
-        $this->assertEquals($expected, genDiff("file3.json", "file4.json", 'plain'));
-        $this->assertEquals($expected, genDiff("file3.yml", "file4.yml", 'plain'));
+        return [
+            ['file3.json', 'file4.json', 'stylish', 'stylishResultNested.txt'],
+            ['file3.yml', 'file4.yml', 'stylish', 'stylishResultNested.txt'],
+            ['file3.json', 'file4.json', 'plain', 'plainResultNested.txt'],
+            ['file3.yml', 'file4.yml', 'plain', 'plainResultNested.txt'],
+            ['file3.json', 'file4.json', 'json', 'jsonResultNested.txt'],
+            ['file3.yml', 'file4.yml', 'json', 'jsonResultNested.txt'],
+        ];
     }
-
-    public function testJson(): void
+    /**
+     * @throws Exception
+     */
+    #[DataProvider('additionProvider')]
+    public function testDiffer(string $oldFileName, string $newFileName, string $format, string $expected): void
     {
-        $expected = file_get_contents(getFixturePath("jsonResult.txt"));
-        $this->assertEquals($expected, genDiff("file1.json", "file2.json", 'json'));
-        $this->assertEquals($expected, genDiff("file1.yml", "file2.yml", 'json'));
+        $oldFixture = $this->getFixturePath($oldFileName);
+        $newFixture = $this->getFixturePath($newFileName);
+        $result = $this->getFixturePath($expected);
 
-        $expected = file_get_contents(getFixturePath("jsonResultNested.txt"));
-        $this->assertEquals($expected, genDiff("file3.json", "file4.json", 'json'));
-        $this->assertEquals($expected, genDiff("file3.yml", "file4.yml", 'json'));
+        $this->assertStringEqualsFile($result, genDiff($oldFixture, $newFixture, $format));
     }
 }

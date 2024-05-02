@@ -84,10 +84,10 @@ function genDiff(string $oldFileName, string $newFileName, string $formatType = 
     $oldFileData = getFileData($oldFileName);
     $newFileData = getFileData($newFileName);
 
-    $oldFileData = parse($oldFileData, $oldFileExt);
-    $newFileData = parse($newFileData, $newFileExt);
+    $parsedOldData = parse($oldFileData, $oldFileExt);
+    $parsedNewData = parse($newFileData, $newFileExt);
 
-    $intStruct = buildInternalStruct($oldFileData, $newFileData);
+    $intStruct = buildInternalStruct($parsedOldData, $parsedNewData);
 
     return selectFormatter($intStruct, $formatType);
 }

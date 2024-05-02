@@ -1,10 +1,10 @@
 <?php
 
-namespace Gendiff\Differ;
+namespace Differ\Differ;
 
-use function Gendiff\Parsers\parse;
 use function Functional\sort;
-use function Gendiff\Formatters\selectFormatter;
+use function Differ\Parsers\parse;
+use function Differ\Formatters\selectFormatter;
 
 function buildInternalStruct(array $oldData, array $newData): array
 {

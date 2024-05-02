@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714645190">
-  <project timestamp="1714645190">
+<coverage generated="1714646170">
+  <project timestamp="1714646170">
     <file name="/home/kov/prj/php-project-48/src/Differ.php">
       <line num="11" type="stmt" count="3"/>
       <line num="12" type="stmt" count="3"/>

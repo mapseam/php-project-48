@@ -1,11 +1,11 @@
 <?php
 
-namespace Gendiff\Parsers;
+namespace Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-use function Gendiff\Helpers\getFixturePath;
-use function Gendiff\Helpers\getFileData;
+use function Differ\Helpers\getFixturePath;
+use function Differ\Helpers\getFileData;
 
 /**
  * @throws \Exception

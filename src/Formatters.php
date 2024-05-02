@@ -1,10 +1,10 @@
 <?php
 
-namespace Gendiff\Formatters;
+namespace Differ\Formatters;
 
-use Gendiff\Formatters\Stylish;
-use Gendiff\Formatters\Plain;
-use Gendiff\Formatters\Json;
+use Differ\Formatters\Stylish;
+use Differ\Formatters\Plain;
+use Differ\Formatters\Json;
 
 function selectFormatter(array $intStruct, string $formatType): string
 {

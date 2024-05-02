@@ -1,6 +1,6 @@
 <?php
 
-namespace Gendiff\Helpers;
+namespace Differ\Helpers;
 
 function getFixturePath($fileName)
 {

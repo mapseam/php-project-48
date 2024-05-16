@@ -21,6 +21,49 @@ function getFileData(string $fileName): string
     return $fileData;
 }
 
+function makeMap(array $sortedKeys, array $data1, array $data2): array
+{
+    return array_map(function ($key) use ($data1, $data2) {
+        $value1 = $data1[$key] ?? null;
+        $value2 = $data2[$key] ?? null;
+        $result = [];
+
+        if (is_array($value1) && is_array($value2)) {
+            $result = [
+                'key' => $key,
+                'status' => 'nested',
+                'children' => buildInternalStruct($value1, $value2)
+            ];
+        } elseif (!array_key_exists($key, $data2)) {
+            $result = [
+                'key' => $key,
+                'status' => 'deleted',
+                'value1' => $value1
+            ];
+        } elseif (!array_key_exists($key, $data1)) {
+            $result = [
+                'key' => $key,
+                'status' => 'added',
+                'value2' => $value2
+            ];
+        } elseif ($value1 !== $value2) {
+            $result = [
+                'key' => $key,
+                'status' => 'changed',
+                'value1' => $value1,
+                'value2' => $value2
+            ];
+        } else {
+            $result = [
+                'key' => $key,
+                'status' => 'unchanged',
+                'value1' => $value1
+            ];
+        }
+        return $result;
+    }, $sortedKeys);
+}
+
 function buildInternalStruct(array $data1, array $data2): array
 {
     $keys1 = array_keys($data1);
@@ -29,49 +72,7 @@ function buildInternalStruct(array $data1, array $data2): array
     $commonKeys = array_unique(array_merge($keys1, $keys2));
     $sortedKeys = sort($commonKeys, fn ($left, $right) => strcmp($left, $right));
 
-    $intStruct = array_map(function ($key) use ($data1, $data2) {
-        $value1 = $data1[$key] ?? null;
-        $value2 = $data2[$key] ?? null;
-
-        if (is_array($value1) && is_array($value2)) {
-            return [
-                'key' => $key,
-                'status' => 'nested',
-                'children' => buildInternalStruct($value1, $value2)
-            ];
-        }
-
-        if (!array_key_exists($key, $data2)) {
-            return [
-                'key' => $key,
-                'status' => 'deleted',
-                'value1' => $value1
-            ];
-        }
-
-        if (!array_key_exists($key, $data1)) {
-            return [
-                'key' => $key,
-                'status' => 'added',
-                'value2' => $value2
-            ];
-        }
-
-        if ($value1 !== $value2) {
-            return [
-                'key' => $key,
-                'status' => 'changed',
-                'value1' => $value1,
-                'value2' => $value2
-            ];
-        }
-
-        return [
-            'key' => $key,
-            'status' => 'unchanged',
-            'value1' => $value1
-        ];
-    }, $sortedKeys);
+    $intStruct = makeMap($sortedKeys, $data1, $data2);
 
     return $intStruct;
 }

@@ -11,22 +11,31 @@ function render(array $intStruct, int $depth = 0): string
         $value1 = stringify(($node['value1'] ?? null), $depth);
         $value2 = stringify(($node['value2'] ?? null), $depth);
 
+        $result = "";
+
         $status = $node['status'];
         switch ($status) {
             case 'nested':
                 $nestedNode = render($node['children'], $depth + 1);
-                return "$indent    $key: $nestedNode";
+                $result = "$indent    $key: $nestedNode";
+                break;
             case 'unchanged':
-                return "$indent    $key: $value1";
+                $result = "$indent    $key: $value1";
+                break;
             case 'added':
-                return "$indent  + $key: $value2";
+                $result = "$indent  + $key: $value2";
+                break;
             case 'deleted':
-                return "$indent  - $key: $value1";
+                $result = "$indent  - $key: $value1";
+                break;
             case 'changed':
-                return "$indent  - $key: $value1\n$indent  + $key: $value2";
+                $result = "$indent  - $key: $value1\n$indent  + $key: $value2";
+                break;
             default:
                 throw new \Exception("Unknown node status: '$status'");
         }
+
+        return $result;
     }, $intStruct);
 
     $output = ["{", ...$lines, "$indent}"];

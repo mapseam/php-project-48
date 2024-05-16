@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\Json;
 
-function render(array $tree): string
+function render(array $intStruct): string
 {
-    return json_encode($tree, JSON_THROW_ON_ERROR);
+    return json_encode($intStruct, JSON_THROW_ON_ERROR);
 }

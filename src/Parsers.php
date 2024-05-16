@@ -7,11 +7,12 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @throws \Exception
  */
-function parse(string $fileData, string $fileExt): array
+function parse(string $fileData, string $fileFormat): array
 {
-    return match ($fileExt) {
+    return match ($fileFormat) {
         'yaml', 'yml' => Yaml::parse($fileData),
         'json' => json_decode($fileData, true),
-        default => throw new \Exception("Unsupported file format: $fileExt"),
+        '' => throw new \Exception("The file format is empty"),
+        default => throw new \Exception("Unsupported file format: $fileFormat"),
     };
 }

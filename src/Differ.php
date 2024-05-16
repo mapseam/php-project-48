@@ -4,7 +4,7 @@ namespace Differ\Differ;
 
 use function Functional\sort;
 use function Differ\Parsers\parse;
-use function Differ\Formatters\selectFormatter;
+use function Differ\Formatters\format;
 
 function getFileData(string $fileName): string
 {
@@ -12,82 +12,82 @@ function getFileData(string $fileName): string
         throw new \Exception("File " . $fileName . " - not found");
     }
 
-    $data = file_get_contents($fileName);
+    $fileData = file_get_contents($fileName);
 
-    if ($data === false) {
+    if ($fileData === false) {
         throw new \Exception("Can't read file " . $fileName);
     }
 
-    return $data;
+    return $fileData;
 }
 
-function buildInternalStruct(array $oldData, array $newData): array
+function buildInternalStruct(array $data1, array $data2): array
 {
-    $oldKeys = array_keys($oldData);
-    $newKeys = array_keys($newData);
+    $keys1 = array_keys($data1);
+    $keys2 = array_keys($data2);
 
-    $commonKeys = array_unique(array_merge($oldKeys, $newKeys));
+    $commonKeys = array_unique(array_merge($keys1, $keys2));
     $sortedKeys = sort($commonKeys, fn ($left, $right) => strcmp($left, $right));
 
-    $intStruct = array_map(function ($key) use ($oldData, $newData) {
-        $oldValue = $oldData[$key] ?? null;
-        $newValue = $newData[$key] ?? null;
+    $intStruct = array_map(function ($key) use ($data1, $data2) {
+        $value1 = $data1[$key] ?? null;
+        $value2 = $data2[$key] ?? null;
 
-        if (is_array($oldValue) && is_array($newValue)) {
+        if (is_array($value1) && is_array($value2)) {
             return [
                 'key' => $key,
                 'status' => 'nested',
-                'children' => buildInternalStruct($oldValue, $newValue)
+                'children' => buildInternalStruct($value1, $value2)
             ];
         }
 
-        if (!array_key_exists($key, $newData)) {
+        if (!array_key_exists($key, $data2)) {
             return [
                 'key' => $key,
                 'status' => 'deleted',
-                'oldValue' => $oldValue
+                'value1' => $value1
             ];
         }
 
-        if (!array_key_exists($key, $oldData)) {
+        if (!array_key_exists($key, $data1)) {
             return [
                 'key' => $key,
                 'status' => 'added',
-                'newValue' => $newValue
+                'value2' => $value2
             ];
         }
 
-        if ($oldValue !== $newValue) {
+        if ($value1 !== $value2) {
             return [
                 'key' => $key,
                 'status' => 'changed',
-                'oldValue' => $oldValue,
-                'newValue' => $newValue
+                'value1' => $value1,
+                'value2' => $value2
             ];
         }
 
         return [
             'key' => $key,
             'status' => 'unchanged',
-            'oldValue' => $oldValue
+            'value1' => $value1
         ];
     }, $sortedKeys);
 
     return $intStruct;
 }
 
-function genDiff(string $oldFileName, string $newFileName, string $formatType = 'stylish'): string
+function genDiff(string $firstFileName, string $secondFileName, string $formatType = 'stylish'): string
 {
-    $oldFileExt = pathinfo($oldFileName, PATHINFO_EXTENSION);
-    $newFileExt = pathinfo($newFileName, PATHINFO_EXTENSION);
+    $firstFileData = getFileData($firstFileName);
+    $secondFileData = getFileData($secondFileName);
 
-    $oldFileData = getFileData($oldFileName);
-    $newFileData = getFileData($newFileName);
+    $firstFileExt = pathinfo($firstFileName, PATHINFO_EXTENSION);
+    $secondFileExt = pathinfo($secondFileName, PATHINFO_EXTENSION);
 
-    $parsedOldData = parse($oldFileData, $oldFileExt);
-    $parsedNewData = parse($newFileData, $newFileExt);
+    $firstParsedData = parse($firstFileData, $firstFileExt);
+    $secondParsedData = parse($secondFileData, $secondFileExt);
 
-    $intStruct = buildInternalStruct($parsedOldData, $parsedNewData);
+    $intStruct = buildInternalStruct($firstParsedData, $secondParsedData);
 
-    return selectFormatter($intStruct, $formatType);
+    return format($intStruct, $formatType);
 }

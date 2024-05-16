@@ -37,13 +37,5 @@ $firstFile = $args->args['<firstFile>'];
 $secondFile = $args->args['<secondFile>'];
 $format = $args->args['--format'];
 
-if (!isset($format)) {
-  $format = 'stylish';
-}
-
-try {
-  $diff = genDiff($firstFile, $secondFile, $format);
-  print_r($diff);
-} catch (Exception $ex) {
-  print_r($ex->getMessage());
-}
+$diff = genDiff($firstFile, $secondFile, $format);
+print_r($diff);

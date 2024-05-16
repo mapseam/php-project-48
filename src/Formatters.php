@@ -6,7 +6,7 @@ use Differ\Formatters\Stylish;
 use Differ\Formatters\Plain;
 use Differ\Formatters\Json;
 
-function selectFormatter(array $intStruct, string $formatType): string
+function format(array $intStruct, string $formatType): string
 {
     return match ($formatType) {
         'stylish' => Stylish\render($intStruct),

@@ -2,14 +2,14 @@
 
 namespace Differ\Formatters\Stylish;
 
-function render(array $tree, int $depth = 0): string
+function render(array $intStruct, int $depth = 0): string
 {
     $indent = str_repeat('    ', $depth);
 
     $lines = array_map(function ($node) use ($indent, $depth) {
         $key = $node['key'];
-        $oldValue = stringify(($node['oldValue'] ?? null), $depth);
-        $newValue = stringify(($node['newValue'] ?? null), $depth);
+        $value1 = stringify(($node['value1'] ?? null), $depth);
+        $value2 = stringify(($node['value2'] ?? null), $depth);
 
         $status = $node['status'];
         switch ($status) {
@@ -17,17 +17,17 @@ function render(array $tree, int $depth = 0): string
                 $nestedNode = render($node['children'], $depth + 1);
                 return "$indent    $key: $nestedNode";
             case 'unchanged':
-                return "$indent    $key: $oldValue";
+                return "$indent    $key: $value1";
             case 'added':
-                return "$indent  + $key: $newValue";
+                return "$indent  + $key: $value2";
             case 'deleted':
-                return "$indent  - $key: $oldValue";
+                return "$indent  - $key: $value1";
             case 'changed':
-                return "$indent  - $key: $oldValue\n$indent  + $key: $newValue";
+                return "$indent  - $key: $value1\n$indent  + $key: $value2";
             default:
                 throw new \Exception("Unknown node status: '$status'");
         }
-    }, $tree);
+    }, $intStruct);
 
     $output = ["{", ...$lines, "$indent}"];
 

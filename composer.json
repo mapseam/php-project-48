@@ -1,8 +1,8 @@
 {
     "name": "hexlet/code",
     "license": "MIT",
-    "type": "project",
-    "description": "study project",
+    "type": "library",
+    "description": "study library",
     "bin": [
         "bin/gendiff"
     ],

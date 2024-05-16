@@ -6,8 +6,8 @@ function render(array $intStruct, array $valuePath = []): string
 {
     $lines = array_map(function ($node) use ($valuePath) {
         $status = $node['status'];
-        $oldValue = stringify($node['oldValue'] ?? null);
-        $newValue = stringify($node['newValue'] ?? null);
+        $value1 = stringify($node['value1'] ?? null);
+        $value2 = stringify($node['value2'] ?? null);
         $fullValuePath = array_merge($valuePath, [$node['key']]);
 
         $path = implode('.', $fullValuePath);
@@ -18,11 +18,11 @@ function render(array $intStruct, array $valuePath = []): string
             case 'unchanged':
                 return;
             case 'added':
-                return "Property '$path' was added with value: $newValue";
+                return "Property '$path' was added with value: $value2";
             case 'deleted':
                 return "Property '$path' was removed";
             case 'changed':
-                return "Property '$path' was updated. From $oldValue to $newValue";
+                return "Property '$path' was updated. From $value1 to $value2";
             default:
                 throw new \Exception("Unknown node status: '$status'");
         }

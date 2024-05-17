@@ -10,29 +10,21 @@ function render(array $intStruct, array $valuePath = []): string
         $fullValuePath = array_merge($valuePath, [$node['key']]);
         $path = implode('.', $fullValuePath);
 
-        $result = "";
-
         $status = $node['status'];
         switch ($status) {
             case 'nested':
-                $result = render($node['children'], $fullValuePath);
-                break;
+                return render($node['children'], $fullValuePath);
             case 'unchanged':
-                break;
+                return;
             case 'added':
-                $result = "Property '$path' was added with value: $value2";
-                break;
+                return "Property '$path' was added with value: $value2";
             case 'deleted':
-                $result = "Property '$path' was removed";
-                break;
+                return "Property '$path' was removed";
             case 'changed':
-                $result = "Property '$path' was updated. From $value1 to $value2";
-                break;
+                return "Property '$path' was updated. From $value1 to $value2";
             default:
                 throw new \Exception("Unknown node status: '$status'");
         }
-
-        return $result;
     }, $intStruct);
 
     $output = array_filter($lines);

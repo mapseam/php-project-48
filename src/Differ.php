@@ -26,41 +26,39 @@ function makeMap(array $sortedKeys, array $data1, array $data2): array
     return array_map(function ($key) use ($data1, $data2) {
         $value1 = $data1[$key] ?? null;
         $value2 = $data2[$key] ?? null;
-        $result = [];
 
         if (is_array($value1) && is_array($value2)) {
-            $result = [
+            return [
                 'key' => $key,
                 'status' => 'nested',
                 'children' => buildInternalStruct($value1, $value2)
             ];
         } elseif (!array_key_exists($key, $data2)) {
-            $result = [
+            return [
                 'key' => $key,
                 'status' => 'deleted',
                 'value1' => $value1
             ];
         } elseif (!array_key_exists($key, $data1)) {
-            $result = [
+            return [
                 'key' => $key,
                 'status' => 'added',
                 'value2' => $value2
             ];
         } elseif ($value1 !== $value2) {
-            $result = [
+            return [
                 'key' => $key,
                 'status' => 'changed',
                 'value1' => $value1,
                 'value2' => $value2
             ];
         } else {
-            $result = [
+            return [
                 'key' => $key,
                 'status' => 'unchanged',
                 'value1' => $value1
             ];
         }
-        return $result;
     }, $sortedKeys);
 }
 

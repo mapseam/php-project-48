@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Tests\DifferTest;
+namespace Differ\Tests;
 
 use Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -37,10 +37,10 @@ class DifferTest extends TestCase
      * @throws Exception
      */
     #[DataProvider('additionProvider')]
-    public function testDiffer(string $firstFileName, string $secondFileName, string $format, string $expected): void
+    public function testDiffer(string $firstFilePath, string $secondFilePath, string $format, string $expected): void
     {
-        $firstFixture = $this->getFixturePath($firstFileName);
-        $secondFixture = $this->getFixturePath($secondFileName);
+        $firstFixture = $this->getFixturePath($firstFilePath);
+        $secondFixture = $this->getFixturePath($secondFilePath);
         $result = $this->getFixturePath($expected);
 
         $this->assertStringEqualsFile($result, genDiff($firstFixture, $secondFixture, $format));

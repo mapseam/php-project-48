@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\Plain;
 
-function render(array $intStruct, array $valuePath = []): string
+function render(array $diff, array $valuePath = []): string
 {
     $lines = array_map(function ($node) use ($valuePath) {
         $value1 = stringify($node['value1'] ?? null);
@@ -11,21 +11,15 @@ function render(array $intStruct, array $valuePath = []): string
         $path = implode('.', $fullValuePath);
 
         $status = $node['status'];
-        switch ($status) {
-            case 'nested':
-                return render($node['children'], $fullValuePath);
-            case 'unchanged':
-                return;
-            case 'added':
-                return "Property '$path' was added with value: $value2";
-            case 'deleted':
-                return "Property '$path' was removed";
-            case 'changed':
-                return "Property '$path' was updated. From $value1 to $value2";
-            default:
-                throw new \Exception("Unknown node status: '$status'");
-        }
-    }, $intStruct);
+        return match ($status) {
+            'nested' => render($node['children'], $fullValuePath),
+            'unchanged' => "",
+            'added' => "Property '$path' was added with value: $value2",
+            'deleted' => "Property '$path' was removed",
+            'changed' => "Property '$path' was updated. From $value1 to $value2",
+            default => throw new \Exception("Unknown node status: '$status'"),
+        };
+    }, $diff);
 
     $output = array_filter($lines);
 
